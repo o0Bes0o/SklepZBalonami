@@ -1,54 +1,70 @@
+/*  Tytuł:       Sklep z Balonami
+    Autor:       Bartosz Strojny
+    Prace nad:   Brak zapętlania    */
+#include <windows.h>
 #include <iostream>
+#include <cstdlib>
+
 
 using namespace std;
 
-void MainPage (int *Choice);
-void SignIn (int *Choice);
-void SignUp (int *Choice);
-void Exit (int *Choice);
+void MainPage (int &Choice);
+void SignIn (int &Choice);
+void SignUp (int &Choice);
+void Exit (bool &On);
 void ExitThanks ();
 void LoremIpsum(int Long);
 
-int main()
-{
+int main(){
     ////////////////////////
     int Choice=0;
+    bool On=1;
+    HANDLE hOut = GetStdHandle( STD_OUTPUT_HANDLE );
+    COORD Coordinate;
     ////////////////////////
-    for(bool On=1;On;On=0){
+    //SetConsoleTextAttribute( hOut, BACKGROUND_RED);
+    SetConsoleTextAttribute( hOut, 0x4F);
+    SetConsoleTitle("Balloon Store");
+    ////////////////////////
+    while(On){
         switch (Choice){
-        case 0:
-                MainPage(&Choice);
+            case 0:
+                MainPage(Choice);
                 break;
             case 1:
-                SignIn(&Choice);
+                SignIn(Choice);
                 break;
             case 2:
-                SignUp(&Choice);
+                SignUp(Choice);
                 break;
             case 3:
-                Exit(&Choice);
+                Exit(On);
                 break;
         }
+        cout<<"\n\n\n\n\n\n";
+        cin>>Choice;
+        system( "cls" );
     }
     //////////////////////
     ExitThanks();
     return 0;
 }
 
-void MainPage (int *Choice){
+void MainPage (int &Choice){
     LoremIpsum(500);
 }
 
-void SignIn (int *Choice){
+void SignIn (int &Choice){
     LoremIpsum(500);
 }
 
-void SignUp (int *Choice){
+void SignUp (int &Choice){
     LoremIpsum(500);
 }
 
-void Exit (int *Choice){
+void Exit (bool &On){
     LoremIpsum(500);
+    On=0;
 }
 
 void ExitThanks (){
